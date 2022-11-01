@@ -5,18 +5,18 @@ import java.sql.SQLException;
 import java.sql.DriverManager;
 
 public class Util {
-    private final static String userName = "root";
-    private final static String password = "Cjkmlkzdct[1";
-    private final static String connectionURL = "jdbc:mysql://localhost:3306/new_schema?serverTimezone=Europe/Moscow&useSSL=false";
-    private final static String JDBCDriver = "com.mysql.jdbc.Driver";
+    private final static String USERNAME = "root";
+    private final static String PASSWORD = "Cjkmlkzdct[1";
+    private final static String URL = "jdbc:mysql://localhost:3306/new_schema?serverTimezone=Europe/Moscow&useSSL=false";
+    private final static String JDBCDRIVER = "com.mysql.jdbc.Driver";
 
 
     public static Connection getConnection() throws SQLException {
         try {
-            Class.forName(JDBCDriver);
+            Class.forName(JDBCDRIVER);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return DriverManager.getConnection(connectionURL, userName, password);
+        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
     }    // реализуйте настройку соеденения с БД
 }
