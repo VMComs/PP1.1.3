@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoJDBCImpl implements UserDao {
-    private final static String CREATE_TABLE_SQL = "create table users_table"
+    private final static String CREATE_TABLE_SQL = "create table if not exists users_table"
             + "(user_id int auto_increment,"
             + "name varchar(20) not null,"
             + "lastName varchar(20) not null,"
             + "age int not null,"
             + "primary key (user_id))";
-    private final static String DROP_TABLE_SQL = "drop table users_table";
+    private final static String DROP_TABLE_SQL = "drop table if exists users_table";
     private final static String INSERT_USER_SQL = "insert into users_table (name, lastName, age) VALUES (?, ?, ?)";
     private final static String GET_ALL_USERS_SQL = "select * from users_table";
     private final static String REMOVE_BY_ID_SQL = "delete from users_table where user_id = ?";
@@ -51,8 +51,8 @@ public class UserDaoJDBCImpl implements UserDao {
             pstatement.setInt(3, age);
             pstatement.execute();
             System.out.printf("User с именем – %s добавлен в базу данных\n", name);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -60,8 +60,8 @@ public class UserDaoJDBCImpl implements UserDao {
         try (PreparedStatement prstatement = connection.prepareStatement(REMOVE_BY_ID_SQL)) {
             prstatement.setString(1, String.valueOf(id));
             prstatement.execute();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 
@@ -78,8 +78,8 @@ public class UserDaoJDBCImpl implements UserDao {
                 user.setId(id);
                 users.add(user);
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
         return users;
     }
@@ -87,8 +87,8 @@ public class UserDaoJDBCImpl implements UserDao {
     public void cleanUsersTable() {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(CLEAN_TABLE_SQL);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
         }
     }
 }

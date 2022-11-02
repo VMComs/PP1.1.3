@@ -8,15 +8,20 @@ public class Util {
     private final static String USERNAME = "root";
     private final static String PASSWORD = "Cjkmlkzdct[1";
     private final static String URL = "jdbc:mysql://localhost:3306/new_schema?serverTimezone=Europe/Moscow&useSSL=false";
-    private final static String JDBCDRIVER = "com.mysql.jdbc.Driver";
+    private final static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
 
     public static Connection getConnection() throws SQLException {
         try {
-            Class.forName(JDBCDRIVER);
+            Class.forName(JDBC_DRIVER);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
-    }    // реализуйте настройку соеденения с БД
+        try {
+            return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        } catch (SQLException ex) {
+            System.out.println("Возникла проблема с подключением");
+        }
+        return null;
+    }
 }
