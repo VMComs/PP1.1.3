@@ -11,7 +11,7 @@ public class Util {
     private final static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() {
         try {
             Class.forName(JDBC_DRIVER);
         } catch (ClassNotFoundException e) {
@@ -19,9 +19,8 @@ public class Util {
         }
         try {
             return DriverManager.getConnection(URL, USERNAME, PASSWORD);
-        } catch (SQLException ex) {
-            System.out.println("Возникла проблема с подключением");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
 }
