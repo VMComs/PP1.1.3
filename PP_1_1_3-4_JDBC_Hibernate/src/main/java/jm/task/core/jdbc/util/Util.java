@@ -11,16 +11,12 @@ public class Util {
     private final static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
 
-    public static Connection getConnection() {
+    public static Connection getConnection() throws SQLException {
         try {
             Class.forName(JDBC_DRIVER);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        try {
             return DriverManager.getConnection(URL, USERNAME, PASSWORD);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

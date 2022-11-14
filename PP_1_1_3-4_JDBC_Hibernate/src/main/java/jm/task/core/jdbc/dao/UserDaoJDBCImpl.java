@@ -20,7 +20,7 @@ public class UserDaoJDBCImpl implements UserDao {
     private final static String REMOVE_BY_ID_SQL = "delete from users_table where user_id = ?";
     private final static String CLEAN_TABLE_SQL = "delete from users_table";
 
-    public UserDaoJDBCImpl() {
+    public UserDaoJDBCImpl() throws SQLException {
     }
     private Connection connection = Util.getConnection();
 
