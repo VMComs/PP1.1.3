@@ -10,15 +10,17 @@ public class Util {
     private final static String URL = "jdbc:mysql://localhost:3306/new_schema?serverTimezone=Europe/Moscow&useSSL=false";
     private final static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 
+    private static Connection conn;
+
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName(JDBC_DRIVER);
-            return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (SQLException ex) {
             System.out.println("Ошибка подключения к БД");
         }
-            return DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            return conn;
     }
 }
