@@ -12,7 +12,7 @@ public class Util {
 
     private static Connection conn;
 
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() {
         try {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
